@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursar — Cursos técnicos e profissionais, num só lugar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFFFFF;
+    --bg-alt: #FDFBF3;
+    --ink: #16302F;
+    --ink-soft: #4B5F5E;
+    --teal: #14BDB2;
+    --teal-deep: #0E9C93;
+    --amber: #F7941D;
+    --amber-soft: #FFF1E0;
+    --lime: #8DC63F;
+    --lime-deep: #6EA62B;
+    --line: #E7E2D4;
+    --white: #FFFFFF;
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: 'Sora', sans-serif; color: var(--teal-deep); letter-spacing: -0.02em; }
+  a{ color: inherit; }
+  img,svg{ display:block; max-width:100%; }
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  header{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(246,245,241,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .logo{ font-family:'Sora',sans-serif; font-weight:600; font-size:20px; color: var(--teal-deep); display:flex; align-items:center; gap:10px; }
+  .logo .dot{ width:9px; height:9px; border-radius:50%; background: var(--lime); }
+  .logo-tag{ font-family:'Inter',sans-serif; font-weight:500; font-size:12px; color: var(--ink-soft); line-height:1.25; border-left:1.5px solid var(--line); padding-left:10px; margin-left:2px; }
+  nav .links{ display:flex; gap:32px; font-size:14.5px; font-weight:500; }
+  nav .links a{ text-decoration:none; color: var(--ink-soft); transition: color .15s; }
+  nav .links a:hover{ color: var(--teal); }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding: 12px 24px; border-radius: 999px; font-weight:600; font-size:14.5px;
+    text-decoration:none; border: 1.5px solid transparent; cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn-primary{ background: var(--teal); color: var(--white); }
+  .btn-primary:hover{ box-shadow: 0 8px 20px rgba(14,71,73,0.25); }
+  .btn-ghost{ border-color: var(--teal); color: var(--teal); }
+
+  /* HERO */
+  .hero{ padding: 100px 0 80px; position:relative; overflow:hidden; text-align:center; }
+  .hero-content{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; align-items:center; }
+  .slogan{
+    font-family:'Sora', sans-serif; font-weight:700; font-size:15px;
+    letter-spacing:.02em; margin-bottom:16px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .slogan span:nth-child(1){ color: var(--teal); }
+  .slogan span:nth-child(2){ color: var(--lime-deep); }
+  .slogan span:nth-child(3){ color: var(--amber); }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    color: var(--teal); background: var(--amber-soft); padding:7px 14px; border-radius:999px; margin-bottom:22px;
+  }
+  .hero h1{ font-size: clamp(32px, 3.6vw, 46px); font-weight:700; line-height:1.18; margin-bottom:22px; }
+  .hero h1 em{ font-style:normal; font-weight:700; color: var(--teal); }
+  .hero p.lead{ font-size:17.5px; color: var(--ink-soft); max-width: 56ch; margin: 0 auto 32px; }
+  .hero .ctas{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+
+  /* SECTIONS */
+  section{ padding: 76px 0; }
+  .section-alt{ background: var(--bg-alt); }
+  .kicker{ font-size:12.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color: var(--amber); margin-bottom:12px; }
+  .kicker.k-lime{ color: var(--lime-deep); }
+  .kicker.k-teal{ color: var(--teal-deep); }
+  h2.h-section .hl-lime{ color: var(--lime-deep); }
+  h2.h-section .hl-amber{ color: var(--amber); }
+  h2.h-section{ font-size: clamp(26px,3vw,34px); font-weight:600; max-width:22ch; margin-bottom:16px; }
+  p.section-lead{ color: var(--ink-soft); font-size:16px; max-width:62ch; }
+
+  .problem-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:48px; margin-top:48px; }
+  .problem-grid .card{ background: var(--white); border:1px solid var(--line); border-radius:18px; padding:32px; }
+  .problem-grid .card h3{ font-size:19px; margin-bottom:10px; }
+  .problem-grid .card p{ color: var(--ink-soft); font-size:15px; }
+  .tag-bad{ color:#9A4A32; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; }
+  .tag-good{ color: var(--teal); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; }
+
+  /* two audiences */
+  .audience-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:48px; }
+  .audience{ border-radius:20px; padding:36px; }
+  .audience.inst{ background: var(--teal-deep); color: var(--white); }
+  .audience.stud{ background: var(--white); border:1px solid var(--line); }
+  .audience h3{ font-size:22px; margin-bottom:6px; }
+  .audience.inst h3{ color: var(--white); }
+  .audience .sub{ font-size:14px; opacity:.8; margin-bottom:22px; }
+  .audience ul{ list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .audience li{ display:flex; gap:12px; font-size:15px; align-items:flex-start; }
+  .audience.inst li{ color: rgba(255,255,255,0.92); }
+  .audience.stud li{ color: var(--ink-soft); }
+  .chip{ flex:none; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; }
+  .audience.inst .chip{ background: var(--amber); color: var(--teal-deep); }
+  .audience.stud .chip{ background: var(--amber-soft); color: var(--teal-deep); }
+
+  /* how it works */
+  .steps{ margin-top:52px; display:grid; grid-template-columns: repeat(4,1fr); gap:0; position:relative; }
+  .steps::before{
+    content:""; position:absolute; top:23px; left:6%; right:6%; height:1.5px; background: var(--line);
+  }
+  .step{ position:relative; padding-right:20px; }
+  .step .num{
+    width:46px; height:46px; border-radius:50%; background: var(--white); border:1.5px solid var(--teal);
+    color: var(--teal); font-family:'Sora',sans-serif; font-weight:600; font-size:17px;
+    display:flex; align-items:center; justify-content:center; position:relative; z-index:2; margin-bottom:18px;
+  }
+  .step h4{ font-size:15.5px; font-weight:700; margin-bottom:8px; color: var(--teal-deep); }
+  .step p{ font-size:13.8px; color: var(--ink-soft); }
+  .step .num.n-lime{ border-color: var(--lime-deep); color: var(--lime-deep); }
+  .step .num.n-amber{ border-color: var(--amber); color: var(--amber); }
+
+  /* trust */
+  .trust{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:56px; align-items:center; }
+  .trust-badge{
+    background: var(--white); border:1px solid var(--line); border-radius:22px; padding:36px; text-align:center;
+  }
+  .trust-badge .ring{
+    width:96px; height:96px; margin:0 auto 18px; border-radius:50%;
+    background: conic-gradient(var(--amber) 0turn, var(--amber) 1turn);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .trust-badge .ring-inner{
+    width:76px; height:76px; border-radius:50%; background: var(--teal-deep);
+    display:flex; align-items:center; justify-content:center; color:var(--white); font-family:'Sora',sans-serif; font-weight:700; font-size:22px;
+  }
+  .trust-badge h4{ font-size:17px; margin-bottom:8px; color: var(--teal-deep); font-family:'Sora',sans-serif; }
+  .trust-badge p{ font-size:13.5px; color: var(--ink-soft); }
+  .trust-list{ display:flex; flex-direction:column; gap:22px; }
+  .trust-item{ display:flex; gap:16px; }
+  .trust-item .mark{ flex:none; width:30px; height:30px; border-radius:8px; background: var(--amber-soft); color:var(--teal-deep); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; }
+  .trust-item .mark.m-lime{ background: #F0F7E4; color: var(--lime-deep); }
+  .trust-item .mark.m-teal{ background: #E3F5F4; color: var(--teal-deep); }
+  .trust-item h4{ font-size:15.5px; margin-bottom:4px; color: var(--teal-deep); }
+  .trust-item p{ font-size:14px; color: var(--ink-soft); }
+
+  /* CTA */
+  .cta-section{ background: var(--teal-deep); color: var(--white); text-align:center; padding: 88px 0; }
+  .cta-section h2{ color: var(--white); font-size: clamp(26px,3.2vw,38px); margin-bottom:16px; }
+  .cta-section p{ color: rgba(255,255,255,0.8); max-width:56ch; margin: 0 auto 34px; font-size:16px; }
+  .cta-section .ctas{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .cta-section .btn-primary{ background: var(--amber); color: var(--teal-deep); }
+  .cta-section .btn-ghost{ border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+  footer{ padding: 40px 0; border-top:1px solid var(--line); }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13.5px; color: var(--ink-soft); }
+
+  @media (max-width: 860px){
+    .hero{ padding-top:52px; }
+    .problem-grid, .audience-grid, .trust{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr 1fr; row-gap:32px; }
+    .steps::before{ display:none; }
+    nav .links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="dot"></span>Cursar<span class="logo-tag">Conecte-se. Aprenda. Cresça.</span></div>
+    <div class="links">
+      <a href="#problema">O problema</a>
+      <a href="#categorias">Categorias</a>
+      <a href="#institutos">Institutos</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#confianca">Confiança</a>
+    </div>
+    <a href="#contacto" class="btn btn-primary">Fala connosco</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="slogan"><span>Conecte-se.</span><span>Aprenda.</span><span>Cresça.</span></div>
+      <div class="eyebrow">Plataforma em desenvolvimento · Moçambique</div>
+      <h1>A formação técnica e profissional de Moçambique, <em>reunida num só lugar</em>.</h1>
+      <p class="lead">A Cursar agrega institutos de formação técnica e profissional oficialmente reconhecidos em todo o país, permitindo que qualquer pessoa, independentemente da província onde se encontre, aceda a cursos de curta e média duração com confiança e credibilidade.</p>
+      <div class="ctas">
+        <a href="#contacto" class="btn btn-primary">Sou um instituto</a>
+        <a href="#contacto" class="btn btn-ghost">Subscrever novidades</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="kicker">O problema</div>
+    <h2 class="h-section">A oferta de qualidade existe. O acesso a ela é que continua <span class="hl-amber">difícil</span>.</h2>
+    <p class="section-lead">Existem institutos técnicos e centros de formação profissional de qualidade em várias províncias de Moçambique. No entanto, cada um divulga-se de forma isolada e com meios limitados, o que dificulta ao estudante encontrar e comparar as opções disponíveis.</p>
+
+    <div class="problem-grid">
+      <div class="card">
+        <div class="tag-bad">Situação actual</div>
+        <h3 style="margin-top:10px;">Oferta fragmentada e pouco visível</h3>
+        <p>Cada instituto divulga-se com os meios que tem — um cartaz, uma publicação isolada nas redes sociais. Quem procura formação não sabe, à partida, onde procurar nem em que instituto confiar.</p>
+      </div>
+      <div class="card">
+        <div class="tag-good">Com a Cursar</div>
+        <h3 style="margin-top:10px;">Um ponto único de confiança</h3>
+        <p>Cursos de institutos devidamente reconhecidos, organizados numa só plataforma, com divulgação profissional — para que o instituto seja encontrado, e o estudante escolha com segurança.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="categorias">
+  <div class="wrap">
+    <div class="kicker k-teal">Categorias de cursos</div>
+    <h2 class="h-section">Duas portas de entrada. <span class="hl-lime">O mesmo critério de confiança</span>.</h2>
+    <p class="section-lead">A Cursar reúne dois tipos de formação, ambos sujeitos à mesma exigência: acreditação oficial junto da entidade competente (nomeadamente a ANEP).</p>
+
+    <div class="audience-grid">
+      <div class="audience stud">
+        <h3>Técnico-médio</h3>
+        <div class="sub">Institutos de nível técnico-médio acreditados</div>
+        <ul>
+          <li><span class="chip">✓</span>Formação técnica de nível médio, com duração mais alargada</li>
+          <li><span class="chip">✓</span>Certificação reconhecida no sistema de ensino técnico-profissional</li>
+        </ul>
+      </div>
+      <div class="audience stud">
+        <h3>Curta e média duração</h3>
+        <div class="sub">Cursos profissionalizantes e de certificação contínua</div>
+        <ul>
+          <li><span class="chip">✓</span>Formação mais rápida e direccionada, para uma competência específica</li>
+          <li><span class="chip">✓</span>Sujeita à acreditação ANEP por curso/qualificação, mesmo quando o instituto não é uma escola técnico-média tradicional</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="institutos">
+  <div class="wrap">
+    <div class="kicker k-lime">Para quem é</div>
+    <h2 class="h-section">Concebida para os dois lados da mesma procura.</h2>
+
+    <div class="audience-grid">
+      <div class="audience inst">
+        <h3>Para institutos</h3>
+        <div class="sub">Formação técnica e profissional acreditada</div>
+        <ul>
+          <li><span class="chip">✓</span>Alcance de estudantes fora da sua região, sem qualquer custo de entrada</li>
+          <li><span class="chip">✓</span>Divulgação e marketing profissional, assegurados pela plataforma</li>
+          <li><span class="chip">✓</span>Comissão aplicada apenas por matrícula efectivamente concretizada</li>
+          <li><span class="chip">✓</span>Pacotes de marketing e destaque, para maior visibilidade dentro da plataforma</li>
+          <li><span class="chip">✓</span>Sem prazos rígidos de listagem — o curso permanece activo enquanto mantiver a acreditação</li>
+        </ul>
+      </div>
+      <div class="audience stud">
+        <h3>Para estudantes</h3>
+        <div class="sub">Em qualquer província do país</div>
+        <ul>
+          <li><span class="chip">✓</span>Cursos de curta e média duração, apresentados de forma comparável num só lugar</li>
+          <li><span class="chip">✓</span>Admissão restrita a institutos devidamente reconhecidos</li>
+          <li><span class="chip">✓</span>Certificação com valor reconhecido, não apenas um certificado de participação</li>
+          <li><span class="chip">✓</span>Acesso a partir de qualquer local com ligação à internet</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="kicker">Como funciona</div>
+    <h2 class="h-section">Do primeiro contacto à <span class="hl-lime">primeira matrícula</span>.</h2>
+    <p class="section-lead">Um processo simples e transparente, concebido para não exigir do instituto mais do que o necessário.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Verificação</h4>
+        <p>Confirma-se que o instituto está oficialmente reconhecido (nomeadamente pela ANEP) antes de qualquer curso ser admitido na plataforma.</p>
+      </div>
+      <div class="step">
+        <div class="num n-lime">2</div>
+        <h4>Listagem</h4>
+        <p>O curso é publicado na plataforma sem qualquer custo — com descrição, duração, certificação e modalidade (presencial, gravado ou online).</p>
+      </div>
+      <div class="step">
+        <div class="num n-amber">3</div>
+        <h4>Divulgação</h4>
+        <p>O curso é promovido junto dos estudantes através das redes sociais, do próprio instituto e de parcerias locais.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Matrícula</h4>
+        <p>O estudante inscreve-se através da plataforma; a Cursar recebe uma comissão do instituto apenas quando a matrícula se concretiza.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="kicker k-lime">Depois da matrícula</div>
+    <h2 class="h-section">A Cursar trata da descoberta e da inscrição. O curso continua a cargo do instituto.</h2>
+    <p class="section-lead">A Cursar não hospeda o conteúdo dos cursos — liga o estudante directamente ao instituto, através do formato que este já utiliza.</p>
+
+    <div class="problem-grid" style="grid-template-columns: repeat(3,1fr); margin-top:44px;">
+      <div class="card">
+        <div class="tag-good">Curso presencial</div>
+        <h3 style="margin-top:10px; font-size:17px;">Confirmação com local e horário</h3>
+        <p>Após a matrícula, o estudante recebe os dados do instituto, o local e o horário das aulas.</p>
+      </div>
+      <div class="card">
+        <div class="tag-good">Curso gravado</div>
+        <h3 style="margin-top:10px; font-size:17px;">Acesso directo ao repositório do instituto</h3>
+        <p>O estudante recebe um link de acesso à plataforma ou repositório onde o instituto disponibiliza as aulas gravadas.</p>
+      </div>
+      <div class="card">
+        <div class="tag-good">Curso online / ao vivo</div>
+        <h3 style="margin-top:10px; font-size:17px;">Link de acesso às aulas</h3>
+        <p>O estudante recebe o link de acesso às sessões (ex. Zoom, Google Meet ou plataforma própria do instituto), fornecido pelo instituto após a confirmação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="confianca">
+  <div class="wrap trust">
+    <div class="trust-badge">
+      <div class="ring"><div class="ring-inner">✓</div></div>
+      <h4>Curadoria, não um catálogo aberto</h4>
+      <p>Cada instituto é sujeito a verificação prévia e a revisão anual para se manter na plataforma.</p>
+    </div>
+    <div class="trust-list">
+      <div class="kicker" style="margin-bottom:2px;">A confiança como princípio</div>
+      <h2 class="h-section" style="margin-bottom:24px;">Nem todos os institutos são admitidos. É <span class="hl-amber">esse o propósito</span>.</h2>
+      <div class="trust-item">
+        <div class="mark">1</div>
+        <div><h4>Reconhecimento oficial obrigatório</h4><p>Apenas institutos acreditados pelos organismos competentes (nomeadamente a ANEP, no caso da formação técnica e profissional) podem listar cursos.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="mark m-lime">2</div>
+        <div><h4>Revisão anual</h4><p>A acreditação e o estado de cada curso são reconfirmados anualmente, garantindo que a plataforma nunca apresenta informação desactualizada.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="mark m-teal">3</div>
+        <div><h4>Visibilidade não é comprada</h4><p>A listagem é gratuita. Existem pacotes de destaque opcionais, mas nunca substituem o critério de admissão.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top:72px;">
+    <div class="kicker k-lime">Processo de admissão</div>
+    <h2 class="h-section">Como um instituto se torna <span class="hl-lime">parceiro</span>.</h2>
+    <p class="section-lead">Um processo claro, com etapas definidas, para que o instituto saiba exactamente o que esperar em cada fase.</p>
+
+    <div class="steps" style="margin-top:44px;">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Submissão de credenciais</h4>
+        <p>O instituto apresenta o certificado de acreditação (ex. ANEP/CNAQ), NUIT e licença de funcionamento.</p>
+      </div>
+      <div class="step">
+        <div class="num n-lime">2</div>
+        <h4>Verificação oficial</h4>
+        <p>Confirmação directa junto do organismo regulador competente, validando o estado da acreditação.</p>
+      </div>
+      <div class="step">
+        <div class="num n-amber">3</div>
+        <h4>Avaliação do curso</h4>
+        <p>Revisão do conteúdo, duração, modalidade e certificação do curso proposto para listagem.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Aprovação e revisão anual</h4>
+        <p>O curso é publicado na plataforma; a acreditação é reconfirmada todos os anos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contacto">
+  <div class="wrap">
+    <h2>Vamos construir isto com os primeiros parceiros.</h2>
+    <p>A Cursar encontra-se em fase de constituição das suas primeiras parcerias. Se representa um instituto de formação técnica ou profissional, ou pretende simplesmente ser informado/a do lançamento da plataforma, entre em contacto.</p>
+    <div class="ctas">
+      <a href="mailto:milena.boanaa@gmail.com?subject=Interesse%20na%20Cursar" class="btn btn-primary">Contactar por email</a>
+      <a href="https://wa.me/258868368531" class="btn btn-ghost">Contactar por WhatsApp</a>
+      <a href="tel:+258868368531" class="btn btn-ghost">Contactar por chamada</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Cursar — projecto em desenvolvimento · Maputo, Moçambique</div>
+    <div>Contacto: milena.boanaa@gmail.com</div>
+  </div>
+</footer>
+
+</body>
+</html>
